@@ -2054,10 +2054,12 @@ void commands_process_packet(unsigned char *data, unsigned int len,
 		}
 		break;
 
-	default:
-		break;
+	default:{
+		uint8_t send_buffer[1] = {0};
+		reply_func(send_buffer, 1);
+	} break;
+		}
 	}
-}
 
 int commands_printf(const char* format, ...) {
 	chMtxLock(&print_mutex);
